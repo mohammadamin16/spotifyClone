@@ -28,6 +28,15 @@ export default function PlayerPage(song_id) {
 
     const audioPlayer = new Audio("https://dl.vmusic.ir/2022/02/Frozen Silence - Emotion (2022)/128k/01) Frozen Silence - By the Sea.mp3")
     const active_bar = player_page.querySelector(".active-bar")
+    const click_taker = player_page.querySelector(".click-taker")
+
+    click_taker.addEventListener('click', (e) => {
+        let rect = e.target.getBoundingClientRect();
+        let x = e.clientX - rect.left; //x position within the element.
+        console.log( x /(rect.right- rect.left));
+        audioPlayer.currentTime = audioPlayer.duration * x /(rect.right- rect.left)
+    })
+
     const pointer = player_page.querySelector(".pointer")
     audioPlayer.play()
     audioPlayer.addEventListener('timeupdate', () => {

@@ -26,6 +26,7 @@ const template = `
         </div>
         
         <div class="timeline">
+            <div class="click-taker"></div>
             <div class="bar"></div>
             <div class="active-bar"></div>
             <div class="pointer"></div>
