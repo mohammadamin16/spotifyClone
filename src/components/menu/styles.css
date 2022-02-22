@@ -1,6 +1,6 @@
 
 .menu{
-    position: fixed;
+    position: absolute;
     bottom: 0;
     display: flex;
     justify-content: space-around;
@@ -12,5 +12,6 @@
     width: 100vw;
     height: 83px;
     color: white;
+    z-index: 100;
 }
 

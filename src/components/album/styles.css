@@ -1,0 +1,33 @@
+.album {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 45%;
+    height: 56px;
+    position: relative;
+    background: #262626;
+    /*background: red;*/
+    margin: 8px;
+    padding: 0;
+    /* Note: backdrop-filter has minimal browser support */
+    /*backdrop-filter: blur(30px);*/
+    color: white;
+    border-radius: 4px;
+}
+
+
+.album .icon{
+    margin:0;
+    width:56px;
+    height:56px;
+}
+
+.album .title-album{
+    margin-left: 8px;
+    font-size: 11px;
+    font-family: circular, serif;
+}
+
+.album .title-album:hover{
+    color: red;
+}
