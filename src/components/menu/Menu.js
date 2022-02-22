@@ -25,9 +25,9 @@ export function Menu(){
     }
 
 
-    let home = Icon("home", home_icon, home_click_handler)
-    let search = Icon("search", search_icon, search_click_handler)
-    let library = Icon("library", library_icon, library_click_handler)
+    let home = Icon("Home", home_icon, home_click_handler)
+    let search = Icon("Search", search_icon, search_click_handler)
+    let library = Icon("Library", library_icon, library_click_handler)
 
     menu.append(home)
     menu.append(search)
