@@ -25,16 +25,34 @@ export default function PlayerPage(song_id) {
     let player_page = document.createElement("div")
     player_page.innerHTML = template
     player_page.className = "player_page"
+    const remaining = player_page.querySelector(".remaining")
+
+    const played = player_page.querySelector(".played")
 
     const audioPlayer = new Audio("https://dl.vmusic.ir/2022/02/Frozen Silence - Emotion (2022)/128k/01) Frozen Silence - By the Sea.mp3")
+    audioPlayer.onloadedmetadata = () => {
+        remaining.innerText = "-" + showSeconds(Math.floor(audioPlayer.duration))
+    }
+    played.innerText = "0:00"
     const active_bar = player_page.querySelector(".active-bar")
     const click_taker = player_page.querySelector(".click-taker")
 
-    click_taker.addEventListener('click', (e) => {
+    const moveHandler = (e) => {
         let rect = e.target.getBoundingClientRect();
-        let x = e.clientX - rect.left; //x position within the element.
-        console.log( x /(rect.right- rect.left));
-        audioPlayer.currentTime = audioPlayer.duration * x /(rect.right- rect.left)
+        let evt = (typeof e.originalEvent === 'undefined') ? e : e.originalEvent;
+        let touch = evt.touches[0] || evt.changedTouches[0];
+        let x = touch.clientX - rect.left; //x position within the element.
+        audioPlayer.currentTime = audioPlayer.duration * x / (rect.right - rect.left)
+    }
+
+
+    click_taker.addEventListener('touchstart', (e) => {
+        moveHandler(e)
+        window.addEventListener('touchmove', moveHandler)
+    })
+
+    click_taker.addEventListener('touchend', (e) => {
+        window.removeEventListener('touchmove', moveHandler)
     })
 
     const pointer = player_page.querySelector(".pointer")
@@ -67,11 +85,6 @@ export default function PlayerPage(song_id) {
 
     player_page.querySelector(".liked_btn").setAttribute('src', like)
 
-    const remaining = player_page.querySelector(".remaining")
-    remaining.innerText = "-3:49"
-
-    const played = player_page.querySelector(".played")
-    played.innerText = "0:03"
 
     player_page.querySelector(".next-btn").setAttribute('src', next)
 
