@@ -14,10 +14,15 @@ router.on('/search', function () {
     goToPage('searchPage')
 });
 
+
+router.on('/player/:album_id/:song_id', function () {
+    goToPage('playerPage')
+});
+
 router.resolve();
 
 function init() {
-    addToScreen(menu)
+    // addToScreen(menu)
 }
 
 init()

@@ -3,6 +3,7 @@ import HomePage from "./pages/home_page/HomePage";
 import SearchPage from "./pages/search_page/SearchPage";
 import AlbumPage from "./pages/album_page/AlbumPage";
 import {Menu} from "./components/menu/Menu";
+import PlayerPage from "./pages/player_page/PlayerPage";
 
 let currentPage = ""
 
@@ -10,6 +11,7 @@ const pageNames = {
     "searchPage": SearchPage,
     "homePage": HomePage,
     "albumPage": AlbumPage,
+    "playerPage": PlayerPage,
 }
 
 
