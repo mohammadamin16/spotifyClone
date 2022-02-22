@@ -4,7 +4,13 @@
   "description": "A Spotify clone with even better features!",
   "author": "Mohammad Amin Tootoonchi",
   "license": "MIT",
+  "scripts": {
+    "start" : "parcel src/index.html"
+  },
   "devDependencies": {
     "parcel": "^2.3.2"
+  },
+  "dependencies": {
+    "navigo": "^8.11.1"
   }
 }

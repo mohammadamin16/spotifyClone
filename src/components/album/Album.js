@@ -1,5 +1,6 @@
 import template from "./template";
 import {albumPage, goToPage, searchPage} from "../../controller";
+import {router} from "../../controller";
 
 export default function Album(title, cover){
     let album = document.createElement("div")
@@ -9,7 +10,7 @@ export default function Album(title, cover){
     album.querySelector(".icon").setAttribute("src", cover)
     album.querySelector(".title-album").innerText = title
     album.addEventListener("click", () => {
-        goToPage(albumPage)
+        router.navigate("album/id")
     })
 
 
