@@ -49,10 +49,16 @@ export default function PlayerPage(song_id) {
     click_taker.addEventListener('touchstart', (e) => {
         moveHandler(e)
         window.addEventListener('touchmove', moveHandler)
+        console.log("touching")
+        active_bar.style.transition = "none !important"
+        pointer.style.transition = "none !important"
     })
 
     click_taker.addEventListener('touchend', (e) => {
+        console.log("end")
         window.removeEventListener('touchmove', moveHandler)
+        active_bar.style.transition = "all ease 500ms"
+        pointer.style.transition = "all ease 500ms"
     })
 
     const pointer = player_page.querySelector(".pointer")
