@@ -1,5 +1,5 @@
 
-.track{
+.track {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -10,21 +10,31 @@
     margin-bottom: 30px;
 }
 
-.track .track-title{
+.track .track-title {
     font-family: circular, serif;
     font-size: 14px;
+    height: 20px;
+    width: 70vw;
+    line-height: 20px;
     text-align: left;
+
     color: white;
+
+    text-overflow: ellipsis;
+    overflow: hidden;
+    direction: ltr;
+    white-space: nowrap;
+
 }
 
-.track .artists{
+.track .artists {
     font-family: circular, serif;
     font-size: 11px;
     color: #B3B3B3;
     margin-top: 5px;
 }
 
-.track .option-icon{
+.track .option-icon {
     right: 20px;
     top: 40%;
     position: absolute;

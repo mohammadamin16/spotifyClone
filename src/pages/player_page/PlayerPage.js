@@ -9,7 +9,8 @@ import previous from "../../images/previous.png"
 import whiteCircle from "../../images/white-circle.png"
 
 import shuffle from "../../images/shuffle-icon.png"
-import loading from "../../images/loading.png"
+import loading from "url:../../images/Loader.gif"
+
 import play from "../../images/play.png"
 import pause from "../../images/pause.png"
 
@@ -39,8 +40,10 @@ export function PlayerPage(data) {
     const audioPlayer = new Audio(song_api['track_url'])
     audioPlayer.onplaying = () => {
         player_page.querySelector(".play-btn").setAttribute('src', play)
-
     }
+
+
+
     audioPlayer.onloadedmetadata = () => {
         remaining.innerText = "-" + showSeconds(Math.floor(audioPlayer.duration))
     }
@@ -82,6 +85,7 @@ export function PlayerPage(data) {
         if (new_song_index >= getCollectionByIndex(data['album_index'])['musics'].length) {
             new_song_index = 0
         }
+        audioPlayer.pause()
         router.navigate(`player/${data['album_index']}/${new_song_index}`)
     }
 
@@ -91,6 +95,7 @@ export function PlayerPage(data) {
         if (new_song_index < 0) {
             new_song_index = getCollectionByIndex(data['album_index'])['musics'].length - 1
         }
+        audioPlayer.pause()
         router.navigate(`player/${data['album_index']}/${new_song_index}`)
     }
 

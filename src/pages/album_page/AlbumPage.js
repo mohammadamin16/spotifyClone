@@ -9,82 +9,30 @@ import play_icon from "../../images/play-icon.png"
 import shuffle_icon from "../../images/shuffle-icon.png"
 import {Track} from "../../components/track/Track";
 import {getCollectionByIndex} from "../../api";
+import FastAverageColor from "fast-average-color";
 
 
 export function AlbumPage(collection_index) {
     let album_page = document.createElement("div")
     album_page.innerHTML = template
     album_page.className = "album_page"
-    console.log(collection_index)
     const collection_data_api = getCollectionByIndex(collection_index)
-    console.log("COLLECTION", collection_data_api)
     const album_data_api = collection_data_api['album']
     const songs_data_api = collection_data_api['musics']
-    console.log("SONGS", songs_data_api)
+
+    const fac = new FastAverageColor();
+    // album_page.querySelector('.cover').setAttribute('crossOrigin', 'Anonymous')
+    fac.getColorAsync(album_page.querySelector('img.cover')).then(color => {
+        // album_page.querySelector('.fade').style.background = color.rgb
+        console.log(color)
+    }).catch((e) => {
+        console.log(e)
+    })
 
     album_page.querySelector('.album_title').innerText = album_data_api['album_name']
     album_page.querySelector('.name').innerText = album_data_api['album_composer']
     album_page.querySelector('.type').innerText = album_data_api['album_genre']
 
-    const album_data = {
-        title: "Album Title",
-        cover_url: albumCover,
-        tracks: [
-            {
-                title: "Creation Comes Alive",
-                owners: "Petit Biscuit, SONIA",
-            },
-            {
-                title: "Creation Comes Alive",
-                owners: "Petit Biscuit, SONIA",
-            },
-            {
-                title: "Creation Comes Alive",
-                owners: "Petit Biscuit, SONIA",
-            },
-            {
-                title: "Creation Comes Alive",
-                owners: "Petit Biscuit, SONIA",
-            },
-            {
-                title: "Creation Comes Alive",
-                owners: "Petit Biscuit, SONIA",
-            },
-            {
-                title: "Creation Comes Alive",
-                owners: "Petit Biscuit, SONIA",
-            },
-            {
-                title: "Creation Comes Alive",
-                owners: "Petit Biscuit, SONIA",
-            },
-            {
-                title: "Creation Comes Alive",
-                owners: "Petit Biscuit, SONIA",
-            },
-            {
-                title: "Creation Comes Alive",
-                owners: "Petit Biscuit, SONIA",
-            },
-            {
-                title: "Creation Comes Alive",
-                owners: "Petit Biscuit, SONIA",
-            },
-            {
-                title: "Creation Comes Alive",
-                owners: "Petit Biscuit, SONIA",
-            },
-            {
-                title: "Creation Comes Alive",
-                owners: "Petit Biscuit, SONIA",
-            },
-            {
-                title: "Creation Comes Alive",
-                owners: "Petit Biscuit, SONIA",
-            }
-        ],
-
-    }
     album_page.querySelector('.cover').setAttribute('src', album_data_api['album_thumb'])
     album_page.querySelector('.avatar').setAttribute("src", hanszimmer)
 

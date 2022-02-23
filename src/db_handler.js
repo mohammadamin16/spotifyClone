@@ -68,11 +68,47 @@ export function db_init() {
         store.createIndex("file", ["file"], {unique: false})
     }
 
+}
 
+export function add_song(song) {
+    const request = indexedDB.open("songDB", 1);
+    request.onsuccess = () => {
+        const db = request.result;
 
+        const transaction = db.transaction("songs", "readwrite");
+
+        const store = transaction.objectStore("songs");
+
+        store.put(song);
+
+        transaction.oncomplete = function () {
+            db.close();
+        };
+    }
+}
+
+export function get_song(song_id) {
+
+    const request = indexedDB.open("songDB", 1);
+    request.onsuccess = () => {
+        const db = request.result;
+
+        const transaction = db.transaction("songs", "readonly");
+
+        const store = transaction.objectStore("songs");
+
+        const idQuery = store.get(song_id);
+        idQuery.onsuccess = function () {
+            console.log('idQuery', idQuery.result);
+        }
+        transaction.oncomplete = function () {
+            db.close();
+        }
+    }
 
 }
 
 
+// add_song({id: 100, file: 'some file'})
 
-
+get_song(100)
