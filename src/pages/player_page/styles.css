@@ -7,6 +7,8 @@
     background-color: #1A1A1A;
     color: white;
     padding: 50px 20px;
+    position: relative;
+    z-index: 3000;
 }
 
 .player_page .container {

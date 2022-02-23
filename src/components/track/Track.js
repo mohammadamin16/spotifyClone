@@ -12,6 +12,6 @@ export function Track(data, album_id, song_id) {
     track.onclick = () => {
         router.navigate(`player/${album_id}/${song_id}`)
     }
-
+    track.on
     return track
 }

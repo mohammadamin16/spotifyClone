@@ -89,7 +89,7 @@ export function PlayerPage(data) {
     player_page.querySelector('.previous-btn').onclick = () => {
         let new_song_index = parseInt(data['song_index']) - 1
         if (new_song_index < 0) {
-            new_song_index = getCollectionByIndex(data['album_index'])['musics'].length -1
+            new_song_index = getCollectionByIndex(data['album_index'])['musics'].length - 1
         }
         router.navigate(`player/${data['album_index']}/${new_song_index}`)
     }
@@ -110,6 +110,11 @@ export function PlayerPage(data) {
 
     audioPlayer.play().then(r => console.log(r))
     audioPlayer.addEventListener('timeupdate', () => {
+        if (document.getElementsByClassName('controls').length === 0) {
+            audioPlayer.pause()
+        }
+        // player_page.querySelector(".play-btn").setAttribute('src', pause)
+
         played.innerText = showSeconds(Math.floor(audioPlayer.currentTime));
         remaining.innerText = "-" + showSeconds(Math.floor(audioPlayer.duration) - Math.floor(audioPlayer.currentTime));
         active_bar.style.width = Math.floor(audioPlayer.currentTime) / Math.floor(audioPlayer.duration) * 100 + "%"
