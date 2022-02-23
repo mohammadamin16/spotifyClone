@@ -48,9 +48,11 @@ const template = `
                 src=""
                 class="btn next-btn">
             
-            <img
-                src=""
-                class="play-btn">
+            <div class="play-btn-container">
+                <img
+                    src=""
+                    class="play-btn">
+            </div>
             
             <img
              src=""

@@ -9,14 +9,12 @@ const template = `
     
     <div class="info-container">
         <div class="album_title">
-            Interstellar
         </div>
         <div class="owner">
             <img
                 src=""
                 class="avatar">
             <div class="name">
-                Hans Zimmer
             </div>    
         </div>
         <div class="additional-info">

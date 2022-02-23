@@ -111,14 +111,12 @@
     border-radius: 100px;
 }
 
-.player_page .timeline .pointer{
+.player_page .timeline .animated{
     transition: all ease-in-out 1000ms;
 }
-
-.player_page .timeline .active-bar{
-    /*transition: all ease 500ms;*/
+.player_page .timeline .not-animated {
+    transition: none;
 }
-
 .player_page .timeline .active-bar{
     position: absolute;
     height: 4px;
@@ -170,9 +168,21 @@
     /*height: 10px;*/
 }
 
-.player_page .controls .play-btn {
+.player_page .controls .play-btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 63px;
     height: 63px;
+    background-color: white;
+    border-radius: 200px;
+}
+
+.player_page .controls .play-btn {
+    color: black;
+
+    width: 45px;
+    height: 45px;
 }
 
 .player_page .other-btns{

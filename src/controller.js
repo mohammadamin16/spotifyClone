@@ -1,27 +1,26 @@
 import Navigo from 'navigo'; // When using ES modules.
 import HomePage from "./pages/home_page/HomePage";
 import SearchPage from "./pages/search_page/SearchPage";
-import AlbumPage from "./pages/album_page/AlbumPage";
+import {AlbumPage} from "./pages/album_page/AlbumPage";
 import {Menu} from "./components/menu/Menu";
-import PlayerPage from "./pages/player_page/PlayerPage";
+import {PlayerPage} from "./pages/player_page/PlayerPage";
 
 let currentPage = ""
 
-const pageNames = {
+export const pageNames = {
     "searchPage": SearchPage,
     "homePage": HomePage,
     "albumPage": AlbumPage,
     "playerPage": PlayerPage,
 }
 
-
 let body = document.querySelector("body")
 
 export const states = {}
-export let searchPage = SearchPage()
-export let albumPage = AlbumPage()
+// export let searchPage = SearchPage()
+// export let albumPage = AlbumPage()
 export let menu = Menu()
-export let homePage = HomePage()
+// export let homePage = HomePage()
 
 export const router = new Navigo('/');
 

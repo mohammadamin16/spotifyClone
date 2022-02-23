@@ -9,10 +9,15 @@ import previous from "../../images/previous.png"
 import whiteCircle from "../../images/white-circle.png"
 
 import shuffle from "../../images/shuffle-icon.png"
+import loading from "../../images/loading.png"
+import play from "../../images/play.png"
+import pause from "../../images/pause.png"
 
 import repeat from "../../images/repeat.png"
 import devices from "../../images/devices.png"
 import queue from "../../images/queue.png"
+import {getAlbumByIndex, getSongByIndex} from "../../api";
+import {pageNames, router} from "../../controller";
 
 function showSeconds(s) {
     let min = Math.floor(s / 60)
@@ -21,7 +26,9 @@ function showSeconds(s) {
 }
 
 
-export default function PlayerPage(song_id) {
+export function PlayerPage(data) {
+    let song_api = getSongByIndex(parseInt(data['album_index']), parseInt(data['song_index']))
+    let album_api = getAlbumByIndex(parseInt(data['album_index']))
     let player_page = document.createElement("div")
     player_page.innerHTML = template
     player_page.className = "player_page"
@@ -29,13 +36,37 @@ export default function PlayerPage(song_id) {
 
     const played = player_page.querySelector(".played")
 
-    const audioPlayer = new Audio("https://dl.vmusic.ir/2022/02/Frozen Silence - Emotion (2022)/128k/01) Frozen Silence - By the Sea.mp3")
+    const audioPlayer = new Audio(song_api['track_url'])
+    audioPlayer.onplaying = () => {
+        player_page.querySelector(".play-btn").setAttribute('src', play)
+
+    }
     audioPlayer.onloadedmetadata = () => {
         remaining.innerText = "-" + showSeconds(Math.floor(audioPlayer.duration))
     }
     played.innerText = "0:00"
+    audioPlayer.autoplay = false
+    audioPlayer.onloadstart = () => {
+        player_page.querySelector(".play-btn").setAttribute('src', loading)
+
+    }
+    audioPlayer.onloadeddata = () => {
+        player_page.querySelector(".play-btn").setAttribute('src', play)
+    }
+
+    player_page.addEventListener('remove', () => {
+        alert()
+    })
+    player_page.querySelector('.back-icon').onclick = () => {
+        router.navigate(`/album/${parseInt(data['album_index'])}`)
+    }
+
     const active_bar = player_page.querySelector(".active-bar")
     const click_taker = player_page.querySelector(".click-taker")
+    const pointer = player_page.querySelector(".pointer")
+
+    active_bar.classList.add('animated')
+    pointer.classList.add('animated')
 
     const moveHandler = (e) => {
         let rect = e.target.getBoundingClientRect();
@@ -43,73 +74,70 @@ export default function PlayerPage(song_id) {
         let touch = evt.touches[0] || evt.changedTouches[0];
         let x = touch.clientX - rect.left; //x position within the element.
         audioPlayer.currentTime = audioPlayer.duration * x / (rect.right - rect.left)
-    }
 
+    }
 
     click_taker.addEventListener('touchstart', (e) => {
         moveHandler(e)
         window.addEventListener('touchmove', moveHandler)
-        console.log("touching")
-        active_bar.style.transition = "none !important"
-        pointer.style.transition = "none !important"
+
     })
 
     click_taker.addEventListener('touchend', (e) => {
-        console.log("end")
         window.removeEventListener('touchmove', moveHandler)
-        active_bar.style.transition = "all ease 500ms"
-        pointer.style.transition = "all ease 500ms"
+        active_bar.classList.add('animated')
+        pointer.classList.add('animated')
+
     })
 
-    const pointer = player_page.querySelector(".pointer")
-    audioPlayer.play()
+    audioPlayer.play().then(r => console.log(r))
     audioPlayer.addEventListener('timeupdate', () => {
         played.innerText = showSeconds(Math.floor(audioPlayer.currentTime));
         remaining.innerText = "-" + showSeconds(Math.floor(audioPlayer.duration) - Math.floor(audioPlayer.currentTime));
         active_bar.style.width = Math.floor(audioPlayer.currentTime) / Math.floor(audioPlayer.duration) * 100 + "%"
         pointer.style.left = Math.floor(audioPlayer.currentTime) / Math.floor(audioPlayer.duration) * 100 + "%"
     });
-    const song = {
-        album: 'Liked Songs',
-        title: 'Song Title',
-        artist: "the artists",
-        liked: true,
 
+
+    // console.log(song_api)
+    const load_images = () => {
+        player_page.querySelector(".song-cover").setAttribute("src", song_api['track_thumb'])
+
+        player_page.querySelector(".album-name").innerText = album_api['album_name']
+
+        player_page.querySelector(".back-icon").setAttribute('src', arrow)
+
+        player_page.querySelector(".option-icon").setAttribute('src', option)
+
+        player_page.querySelector(".song-name").innerText = song_api['track_name']
+
+        player_page.querySelector(".artist").innerText = album_api['album_composer']
+
+        player_page.querySelector(".liked_btn").setAttribute('src', like)
+
+        player_page.querySelector(".next-btn").setAttribute('src', next)
+
+        player_page.querySelector(".previous-btn").setAttribute('src', previous)
+
+        player_page.querySelector(".shuffle-btn").setAttribute('src', shuffle)
+
+        player_page.querySelector(".repeat-btn").setAttribute('src', repeat)
+
+        player_page.querySelector(".devices").setAttribute('src', devices)
+
+        player_page.querySelector(".queue").setAttribute('src', queue)
     }
-
-    player_page.querySelector(".song-cover").setAttribute("src", cover)
-
-    player_page.querySelector(".album-name").innerText = song['album']
-
-    player_page.querySelector(".back-icon").setAttribute('src', arrow)
-
-    player_page.querySelector(".option-icon").setAttribute('src', option)
-
-    player_page.querySelector(".song-name").innerText = song['title']
-
-    player_page.querySelector(".artist").innerText = song['artist']
-
-    player_page.querySelector(".liked_btn").setAttribute('src', like)
-
-
-    player_page.querySelector(".next-btn").setAttribute('src', next)
-
-    player_page.querySelector(".previous-btn").setAttribute('src', previous)
-
-    player_page.querySelector(".play-btn").setAttribute('src', whiteCircle)
-
-    player_page.querySelector(".shuffle-btn").setAttribute('src', shuffle)
-
-    player_page.querySelector(".repeat-btn").setAttribute('src', repeat)
-
-    player_page.querySelector(".devices").setAttribute('src', devices)
-
-    player_page.querySelector(".queue").setAttribute('src', queue)
+    load_images()
 
     player_page.querySelector(".play-btn").addEventListener("click", () => {
         if (audioPlayer.paused) {
-            audioPlayer.play()
+            audioPlayer.play().then((e) => {
+                player_page.querySelector(".play-btn").setAttribute('src', pause)
+            }).then((e) => {
+            })
         } else {
+            player_page.querySelector(".play-btn").setAttribute('src', play)
+
             audioPlayer.pause()
         }
     })
