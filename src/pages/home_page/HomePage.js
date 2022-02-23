@@ -1,6 +1,5 @@
 import template from "./template";
 import {Album} from "../../components/album/Album";
-import album_cover1 from "../../images/album-icon1.png"
 import {getAlbums} from "../../api";
 export default function HomePage(){
     let page = document.createElement("div")

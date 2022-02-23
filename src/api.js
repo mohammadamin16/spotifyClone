@@ -1,77 +1,9 @@
-//
-// export const getCollectionByID = (album_id) => {
-//     let result = ""
-//
-//     for (let i=0; i<data.length; i++){
-//         // console.log(data[i]['album']['id'])
-//         // console.log(album_id)
-//         if (data[i]['album']['id'] === album_id){
-//             return data[i]
-//         }
-//     }
-//
-//     return {
-//         "album": {
-//             "id": "114701",
-//             "album_name": "Emotion",
-//             "album_composer": "Frozen Silence",
-//             "album_genre": "Classical Crossover",
-//             "album_thumb": "https://vmusic.ir/wp-content/uploads/2022/02/Frozen-Silence-Emotion-2022-225x225.jpg",
-//             "album_url": "https://vmusic.ir/album/frozen-silence-emotion-2022/"
-//         },
-//         "musics": [
-//             {
-//                 "id": 114760,
-//                 "track_name": "By the Sea",
-//                 "track_time": "1:27",
-//                 "track_url": "https://dl.vmusic.ir/2022/02/Frozen Silence - Emotion (2022)/128k/01) Frozen Silence - By the Sea.mp3",
-//                 "track_thumb": "https://vmusic.ir/wp-content/uploads/2022/02/Frozen-Silence-Emotion-2022-225x225.jpg",
-//                 "is_favorited": 0,
-//                 "like_status": "like",
-//                 "nonce": "7819dbac95"
-//             }]
-//     }
-//     // data.forEach((item) => {
-//     //     if (item['album']['id'] === album_id){
-//     //         result = item
-//     //     }
-//     // })
-//     //
-//     // return result
-// }
-//
-//
-// export const getAlbumByID = (album_id) => {
-//     let collection = getCollectionByID(album_id)
-//     let album = collection['album']
-//     return album
-// }
-//
-// export const getSongsByAlbumID = (album_id) => {
-//     let collection = getCollectionByID(album_id)
-//     let songs = collection['musics']
-//     return songs
-// }
-//
-// export const getSong = (songID, albumID) => {
-//     let songs = getSongsByAlbumID(albumID)
-//     let result = {}
-//
-//     songs.forEach((song) => {
-//         if (song['id'] === songID){
-//             result = song
-//         }
-//     })
-//     return result
-// }
 
 export const getCollectionByIndex = (index) => {
     return data[index]
 }
 
 export const getAlbumByIndex = (index) => {
-    console.log(index)
-    console.log(data[index])
     return data[index]['album']
 }
 

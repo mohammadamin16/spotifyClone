@@ -16,7 +16,7 @@ import pause from "../../images/pause.png"
 import repeat from "../../images/repeat.png"
 import devices from "../../images/devices.png"
 import queue from "../../images/queue.png"
-import {getAlbumByIndex, getSongByIndex} from "../../api";
+import {getAlbumByIndex, getCollectionByIndex, getSongByIndex} from "../../api";
 import {pageNames, router} from "../../controller";
 
 function showSeconds(s) {
@@ -55,7 +55,7 @@ export function PlayerPage(data) {
     }
 
     player_page.addEventListener('remove', () => {
-        alert()
+        alert("removing")
     })
     player_page.querySelector('.back-icon').onclick = () => {
         router.navigate(`/album/${parseInt(data['album_index'])}`)
@@ -76,6 +76,24 @@ export function PlayerPage(data) {
         audioPlayer.currentTime = audioPlayer.duration * x / (rect.right - rect.left)
 
     }
+
+    player_page.querySelector('.next-btn').onclick = () => {
+        let new_song_index = parseInt(data['song_index']) + 1
+        if (new_song_index >= getCollectionByIndex(data['album_index'])['musics'].length) {
+            new_song_index = 0
+        }
+        router.navigate(`player/${data['album_index']}/${new_song_index}`)
+    }
+
+
+    player_page.querySelector('.previous-btn').onclick = () => {
+        let new_song_index = parseInt(data['song_index']) - 1
+        if (new_song_index < 0) {
+            new_song_index = getCollectionByIndex(data['album_index'])['musics'].length -1
+        }
+        router.navigate(`player/${data['album_index']}/${new_song_index}`)
+    }
+
 
     click_taker.addEventListener('touchstart', (e) => {
         moveHandler(e)
@@ -99,7 +117,6 @@ export function PlayerPage(data) {
     });
 
 
-    // console.log(song_api)
     const load_images = () => {
         player_page.querySelector(".song-cover").setAttribute("src", song_api['track_thumb'])
 

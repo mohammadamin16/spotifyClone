@@ -45,18 +45,18 @@ const template = `
              class="btn shuffle-btn">        
             
             <img
-                src=""
-                class="btn next-btn">
+             src=""
+             class="btn previous-btn">
             
             <div class="play-btn-container">
                 <img
                     src=""
                     class="play-btn">
             </div>
-            
             <img
-             src=""
-             class="btn previous-btn">
+                src=""
+                class="btn next-btn">
+            
             
             <img
                 src=""
