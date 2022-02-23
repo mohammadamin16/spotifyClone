@@ -1,0 +1,23 @@
+.icon {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: circular, serif;
+    font-size: 11px;
+    margin-top: 5px;
+    font-weight: lighter;
+}
+
+.icon .title{
+    margin-top: 5px;
+
+}
+
+.icon .icon-image {
+    width: 24px;
+    /*height: 24px;*/
+}
+
+
+/*# sourceMappingURL=index.1a7ddd12.css.map */

@@ -1,0 +1,19 @@
+
+.menu{
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px;
+    box-sizing: border-box;
+    margin:0;
+    background-color: #282828;
+    width: 100vw;
+    height: 83px;
+    color: white;
+    z-index: 100;
+    box-shadow: rgb(0, 0, 0) 0 -10px 10px 5px;
+}
+
+/*# sourceMappingURL=index.a80ab2ce.css.map */

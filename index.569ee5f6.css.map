@@ -1,0 +1,1 @@
+{"mappings":"AAAA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA","sources":["src/pages/search_page/styles.css"],"sourcesContent":["\n.search_page{\n    margin:0;\n    padding: 0;\n    background-color: #3a0f0f;\n    width: 100vw;\n    height: 100vh;\n    color: white;\n}\n\n"],"names":[],"version":3,"file":"index.569ee5f6.css.map","sourceRoot":"/__parcel_source_root/"}

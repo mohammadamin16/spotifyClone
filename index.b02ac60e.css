@@ -1,0 +1,203 @@
+
+.player_page {
+    font-family: circular, serif;
+    text-align: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: #1A1A1A;
+    color: white;
+    padding: 50px 20px;
+}
+
+.player_page .container {
+    display: flex;
+    flex-direction: column;
+    /*justify-content: center;*/
+    /*background-color: red;*/
+    align-items: center;
+}
+
+.player_page .header {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.player_page .back-icon {
+    width: 23px;
+    height: 15px;
+}
+
+.player_page .option-icon {
+    width: 23px;
+    height: 7px;
+    scale: 100;
+}
+
+.player_page .cover-container {
+    margin: 40px 0;
+    /*border: 1px white solid;*/
+    width: 366px;
+}
+
+
+.player_page .cover-container .song-cover {
+    width: 100%;
+}
+
+.player_page .song {
+    position: relative;
+    width: 100%;
+    /*border: 1px solid white;*/
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.player_page .song .song-name {
+
+    font-style: normal;
+    font-weight: bold;
+    font-size: 22px;
+    line-height: 28px;
+    /* identical to box height */
+
+    letter-spacing: -0.045em;
+
+}
+
+.player_page .song .artist {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 19px;
+    /* identical to box height */
+    color: #BBBBBA;
+    letter-spacing: -0.045em;
+    margin-top: 10px;
+
+}
+
+.player_page .song .liked_btn {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 24px;
+}
+
+.player_page .click-taker {
+    width: 100%;
+    top:-8px;
+    z-index: 2;
+    position: absolute;
+    padding: 10px;
+    background-color: transparent;
+
+}
+
+
+.player_page .timeline{
+    width: 100%;
+    position: relative;
+    margin-top: 20px;
+}
+
+.player_page .timeline .bar{
+    width: 100%;
+    position: absolute;
+    height: 4px;
+    background-color: #474747;
+    border-radius: 100px;
+}
+
+.player_page .timeline .animated{
+    transition: all ease-in-out 1000ms;
+}
+.player_page .timeline .not-animated {
+    transition: none;
+}
+.player_page .timeline .active-bar{
+    position: absolute;
+    height: 4px;
+    width: 0;
+    background-color: white;
+    border-radius: 100px;
+}
+
+.player_page .timeline .pointer{
+    position: absolute;
+    top:-4.5px;
+    left:0%;
+    width: 13px;
+    height: 13px;
+    border-radius: 100px;
+    background-color: white;
+}
+
+.player_page .time{
+    margin-top: 10px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.player_page .time .played{
+    color: #BABABA;
+    font-size: 11px;
+}
+
+.player_page .time .remaining{
+    color: #BABABA;
+    font-size: 11px;
+}
+
+.player_page .controls {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+.player_page .controls .btn{
+    width: 25px;
+    /*height: 20px;*/
+    /*height: 10px;*/
+}
+
+.player_page .controls .play-btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 63px;
+    height: 63px;
+    background-color: white;
+    border-radius: 200px;
+}
+
+.player_page .controls .play-btn {
+    color: black;
+
+    width: 45px;
+    height: 45px;
+}
+
+.player_page .other-btns{
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 90%;
+    margin-top: 30px;
+    bottom: 10vh;
+}
+
+.player_page .other-btns img{
+    width:20px;
+    flex:0;
+}
+
+/*# sourceMappingURL=index.b02ac60e.css.map */
