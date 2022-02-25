@@ -1,0 +1,8 @@
+- add favicon
+- use IndexDB to store music files
+- use IndexDB to store liked songs
+- create Library page
+- complete homepage design
+- improve player page scrolling
+- show songs image in search page
+- make Audio Player global
