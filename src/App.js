@@ -1,5 +1,4 @@
 import {addToScreen, goToPage, menu, router,} from "./controller";
-import {db_init} from './db_handler'
 
 
 
@@ -29,4 +28,4 @@ function init() {
 }
 
 init()
-db_init()
+// db_init()

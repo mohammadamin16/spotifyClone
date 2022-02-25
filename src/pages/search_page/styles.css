@@ -1,10 +1,100 @@
 
-.search_page{
-    margin:0;
+.search_page {
+    position: relative;
+    font-family: circular, serif;
+    margin: 0;
     padding: 0;
-    background-color: #3a0f0f;
+    background-color: #121212;
     width: 100vw;
     height: 100vh;
     color: white;
 }
+
+.search_page .search_container {
+    display: flex;
+    padding-top: 50px;
+    padding-bottom: 10px;
+    flex-direction: row;
+    justify-content: center;
+    background-color: #191919;
+    width: 100%;
+}
+
+.search_page .search_items_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    flex-direction: row;
+    /*background-color: red;*/
+}
+
+.search_page .search_camera_icon {
+    width: 30px;
+    filter: invert(98%) sepia(2%) saturate(10%) hue-rotate(188deg) brightness(107%) contrast(99%);
+}
+
+.search_page .search_input_container {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    /*justify-content: center;*/
+    background-color: #242424;
+    border-radius: 8px;
+    height: 28px;
+    padding: 0;
+    margin: 0;
+}
+
+.search_page .search_input {
+    padding: 0;
+    height: 100%;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    margin: 0 0 0 10px;
+    color: white;
+    font-family: circular, serif;
+}
+
+.search_page .search_icon {
+    margin-left: 10px;
+    height: 70%;
+    /*background-color: red;*/
+    padding: 0;
+    font-size: 14.5px;
+    line-height: 18px;
+    letter-spacing: -0.02em;
+}
+
+.search_page .search_input::placeholder {
+    color: #FFFFFF;
+}
+
+.search_page .search_cancel {
+    margin: 0 20px;
+}
+
+.search_page .track_container{
+    padding: 10px;
+    height: 80vh;
+    overflow: scroll;
+}
+.search_page .mic_btn{
+    position: absolute;
+    bottom: 15vh;
+    right: 3vw;
+    width: 59px;
+    height: 59px;
+    background-color: white;
+    border-radius: 100px;
+    z-index: 10000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.search_page .mic_btn .mic_icon{
+    width: 29px;
+}
+
 
