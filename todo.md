@@ -6,3 +6,5 @@
 - improve player page scrolling
 - show songs image in search page
 - make Audio Player global
+-show active pages in menu
+

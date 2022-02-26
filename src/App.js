@@ -12,10 +12,15 @@ router.on('/home', function () {
     goToPage('homePage')
 });
 
+
 router.on('/search', function () {
     goToPage('searchPage')
 });
 
+
+router.on('/library', function () {
+    goToPage('libraryPage')
+});
 
 router.on('/player/:album_index/:song_index', function ({data}) {
     goToPage('playerPage', data)

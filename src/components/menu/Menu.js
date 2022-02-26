@@ -20,8 +20,7 @@ export function Menu(){
     }
 
     const library_click_handler = () => {
-        alert("Libray")
-        // goToPage()
+        router.navigate("library")
     }
 
 

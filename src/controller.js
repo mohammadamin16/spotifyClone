@@ -4,6 +4,7 @@ import {SearchPage} from "./pages/search_page/SearchPage";
 import {AlbumPage} from "./pages/album_page/AlbumPage";
 import {Menu} from "./components/menu/Menu";
 import {PlayerPage} from "./pages/player_page/PlayerPage";
+import {LibraryPage} from "./pages/library_page/LibraryPage";
 
 let currentPage = ""
 
@@ -12,15 +13,13 @@ export const pageNames = {
     "homePage": HomePage,
     "albumPage": AlbumPage,
     "playerPage": PlayerPage,
+    "libraryPage": LibraryPage,
 }
 
 let body = document.querySelector("body")
 
 export const states = {}
-// export let searchPage = SearchPage()
-// export let albumPage = AlbumPage()
 export let menu = Menu()
-// export let homePage = HomePage()
 
 export const router = new Navigo('/');
 
