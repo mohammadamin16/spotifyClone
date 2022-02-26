@@ -1,5 +1,6 @@
 import {addToScreen, goToPage, router,} from "./controller";
-
+import {db_init} from "./db_handler";
+import axios from "axios";
 
 
 router.on('', ({data}) => {
@@ -8,11 +9,11 @@ router.on('', ({data}) => {
 
 
 router.on('/album/:id', ({data}) => {
-    goToPage('albumPage', data['id'],'home')
+    goToPage('albumPage', data['id'], 'home')
 });
 
 router.on('/home', ({data}) => {
-    goToPage('homePage', data,'home')
+    goToPage('homePage', data, 'home')
 });
 
 
@@ -22,7 +23,7 @@ router.on('/search', ({data}) => {
 
 
 router.on('/library', ({data}) => {
-    goToPage('libraryPage',data, 'library')
+    goToPage('libraryPage', data, 'library')
 });
 
 router.on('/player/:album_index/:song_index', function ({data}) {
@@ -35,5 +36,6 @@ function init() {
     // addToScreen(menu)
 }
 
+
 init()
-// db_init()
+db_init()

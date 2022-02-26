@@ -1,12 +1,10 @@
 import template from "./template";
-import cover from "../../images/albumcover2.png"
 import arrow from "../../images/arrow.png"
 import option from "../../images/options.png"
 import like from "../../images/Like.png"
 
 import next from "../../images/next.png"
 import previous from "../../images/previous.png"
-import whiteCircle from "../../images/white-circle.png"
 
 import shuffle from "../../images/shuffle-icon.png"
 import loading from "url:../../images/Loader.gif"
@@ -19,6 +17,8 @@ import devices from "../../images/devices.png"
 import queue from "../../images/queue.png"
 import {getAlbumByIndex, getCollectionByIndex, getSongByIndex} from "../../api";
 import {pageNames, router} from "../../controller";
+import axios from "axios";
+import {add_song, get_song} from "../../db_handler";
 
 function showSeconds(s) {
     let min = Math.floor(s / 60)
@@ -28,20 +28,71 @@ function showSeconds(s) {
 
 
 export function PlayerPage(data) {
-    let song_api = getSongByIndex(parseInt(data['album_index']), parseInt(data['song_index']))
-    let album_api = getAlbumByIndex(parseInt(data['album_index']))
+    let audioPlayer = new Audio()
     let player_page = document.createElement("div")
     player_page.innerHTML = template
     player_page.className = "player_page"
+    let song_api = getSongByIndex(parseInt(data['album_index']), parseInt(data['song_index']))
+    let album_api = getAlbumByIndex(parseInt(data['album_index']))
+
+    function fetch_song_file() {
+        player_page.querySelector(".play-btn").setAttribute('src', loading)
+        const URL = song_api['track_url']
+
+        get_song(song_api['id'], (r) => {
+            console.log('hello')
+            if (r) {
+                console.log('got something')
+                console.log(r)
+                audioPlayer.setAttribute("src", r['file']);
+                player_page.querySelector(".play-btn").setAttribute('src', play)
+                audioPlayer.pause()
+            } else {
+                console.log('lets download')
+                axios.get(URL, {responseType: "blob"})
+                    .then(function (response) {
+                        let reader = new window.FileReader();
+                        reader.readAsDataURL(response.data);
+                        reader.onload = function () {
+                            let audioDataUrl = reader.result;
+                            audioPlayer.setAttribute("src", audioDataUrl);
+                            audioPlayer.pause()
+                            player_page.querySelector(".play-btn").setAttribute('src', play)
+                            let new_song = {id: song_api['id'], file: audioDataUrl, title:song_api['track_name']}
+                            add_song(new_song)
+                        }
+                    });
+
+            }
+        })
+
+        // axios.get(URL)
+        //     .then(function (response) {
+        //         console.log('success!');
+        //         console.log(response)
+        //         audioPlayer = new Audio(response.data)
+        //         // audioPlayer.src = URL
+        //         // audioPlayer.src =
+        //     })
+        //     .catch(function (error) {
+        //         console.log(error);
+        //     })
+    }
+
+    audioPlayer.src = song_api['track_url']
+    audioPlayer.pause()
+
+    // fetch_song_file()
+
     const remaining = player_page.querySelector(".remaining")
 
     const played = player_page.querySelector(".played")
 
-    const audioPlayer = new Audio(song_api['track_url'])
+    // const audioPlayer = new Audio(song_api['track_url'])
+
     audioPlayer.onplaying = () => {
         player_page.querySelector(".play-btn").setAttribute('src', play)
     }
-
 
 
     audioPlayer.onloadedmetadata = () => {
@@ -49,17 +100,15 @@ export function PlayerPage(data) {
     }
     played.innerText = "0:00"
     audioPlayer.autoplay = false
-    audioPlayer.onloadstart = () => {
-        player_page.querySelector(".play-btn").setAttribute('src', loading)
-
-    }
+    // audioPlayer.onloadstart = () => {
+    //     player_page.querySelector(".play-btn").setAttribute('src', loading)
+    //
+    // }
     audioPlayer.onloadeddata = () => {
         player_page.querySelector(".play-btn").setAttribute('src', play)
     }
 
-    player_page.addEventListener('remove', () => {
-        alert("removing")
-    })
+
     player_page.querySelector('.back-icon').onclick = () => {
         router.navigate(`/album/${parseInt(data['album_index'])}`)
     }
