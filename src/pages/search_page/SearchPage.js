@@ -16,18 +16,17 @@ export function SearchPage() {
         .setAttribute('src', search_icon)
 
     let track_container = searchPage.querySelector('.track_container')
-    let songs = []
+    let results = null
 
     let search_input = searchPage.querySelector('.search_input')
     let search_query = search_input.value
     search_input.addEventListener('keyup', (e) => {
         search_query = e.target.value
-        console.log(search_query)
         track_container.innerHTML = ""
         if (search_query.length >= 2){
-            songs = searchInSongs(search_query)
-            for (const song of songs) {
-                track_container.append(Track(song, 1, 1))
+            results = searchInSongs(search_query)
+            for (const result of results) {
+                track_container.append(Track(result[0], result[1], result[2]))
             }
         }
     })

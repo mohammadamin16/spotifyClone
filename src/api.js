@@ -25,7 +25,7 @@ export const getAlbums = () => {
 const getAllSongs = () => {
     let allSongs = []
     for (const collection of data){
-        allSongs.push(...collection['musics'])
+        allSongs.push(collection['musics'])
     }
     return allSongs
 }
@@ -34,8 +34,10 @@ export const searchInSongs = (query) => {
     let all_songs = getAllSongs()
     let results = []
     for (let i=0; i<all_songs.length; i++){
-        if (all_songs[i]['track_name'].toLowerCase().includes(query.toLowerCase())){
-            results.push(all_songs[i])
+        for (let j=0; j<all_songs[i].length; j++) {
+            if (all_songs[i][j]['track_name'].toLowerCase().includes(query.toLowerCase())) {
+                results.push([all_songs[i][j], i, j])
+            }
         }
     }
     return results
@@ -4345,4 +4347,4 @@ export const data =[
     }
 ]
 
-// console.log(searchInSongs("Song"))
+console.log(searchInSongs("Song"))
