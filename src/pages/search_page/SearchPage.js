@@ -35,5 +35,8 @@ export function SearchPage() {
     cancel_text.onclick = () => {
         search_input.value = ""
     }
+    setTimeout(() => {
+        search_input.focus()
+    },300)
     return searchPage
 }

@@ -2,6 +2,10 @@ import {addToScreen, goToPage, router,} from "./controller";
 
 
 
+router.on('', ({data}) => {
+    window.location.pathname = 'home'
+});
+
 
 router.on('/album/:id', ({data}) => {
     goToPage('albumPage', data['id'],'home')
