@@ -25,12 +25,13 @@ export const router = new Navigo('/');
 
 
 
-export function goToPage(to, args={}) {
+export function goToPage(to, args={}, active_tab='home') {
     if (currentPage !== ""){
         currentPage.remove()
     }
     let new_screen = pageNames[to](args)
     body.append(new_screen)
+    body.append(Menu(active_tab))
     currentPage = new_screen
 }
 

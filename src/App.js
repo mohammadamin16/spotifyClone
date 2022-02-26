@@ -1,25 +1,24 @@
-import {addToScreen, goToPage, menu, router,} from "./controller";
+import {addToScreen, goToPage, router,} from "./controller";
 
 
 
 
 router.on('/album/:id', ({data}) => {
-    console.log(data)
-    goToPage('albumPage', data['id'])
+    goToPage('albumPage', data['id'],'home')
 });
 
-router.on('/home', function () {
-    goToPage('homePage')
-});
-
-
-router.on('/search', function () {
-    goToPage('searchPage')
+router.on('/home', ({data}) => {
+    goToPage('homePage', data,'home')
 });
 
 
-router.on('/library', function () {
-    goToPage('libraryPage')
+router.on('/search', ({data}) => {
+    goToPage('searchPage', data, 'search')
+});
+
+
+router.on('/library', ({data}) => {
+    goToPage('libraryPage',data, 'library')
 });
 
 router.on('/player/:album_index/:song_index', function ({data}) {
@@ -29,7 +28,7 @@ router.on('/player/:album_index/:song_index', function ({data}) {
 router.resolve();
 
 function init() {
-    addToScreen(menu)
+    // addToScreen(menu)
 }
 
 init()

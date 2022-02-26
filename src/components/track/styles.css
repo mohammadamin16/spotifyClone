@@ -4,6 +4,8 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: space-between;
+
     padding: 0 16px;
     /*border: 1px white solid;*/
     height: 48px;

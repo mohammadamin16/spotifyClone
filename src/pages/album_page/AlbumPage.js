@@ -9,7 +9,6 @@ import play_icon from "../../images/play-icon.png"
 import shuffle_icon from "../../images/shuffle-icon.png"
 import {Track} from "../../components/track/Track";
 import {getCollectionByIndex} from "../../api";
-import FastAverageColor from "fast-average-color";
 
 
 export function AlbumPage(collection_index) {
@@ -20,14 +19,6 @@ export function AlbumPage(collection_index) {
     const album_data_api = collection_data_api['album']
     const songs_data_api = collection_data_api['musics']
 
-    const fac = new FastAverageColor();
-    // album_page.querySelector('.cover').setAttribute('crossOrigin', 'Anonymous')
-    fac.getColorAsync(album_page.querySelector('img.cover')).then(color => {
-        // album_page.querySelector('.fade').style.background = color.rgb
-        console.log(color)
-    }).catch((e) => {
-        console.log(e)
-    })
 
     album_page.querySelector('.album_title').innerText = album_data_api['album_name']
     album_page.querySelector('.name').innerText = album_data_api['album_composer']
@@ -46,7 +37,7 @@ export function AlbumPage(collection_index) {
     let track_container = album_page.querySelector(".track_container")
     if (songs_data_api) {
         for (let i = 0; i < songs_data_api.length; i++) {
-            let t = Track(songs_data_api[i], collection_index, i)
+            let t = Track(songs_data_api[i], collection_index, i, true)
             // console.log(songs_data_api[i])
             track_container.append(t)
         }
