@@ -23,7 +23,6 @@ export function db_init() {
 }
 
 export function add_song(song) {
-    console.log(song)
     const request = indexedDB.open("songsDB", 1);
     request.onerror = (e) => {
         console.error(e)
@@ -62,7 +61,6 @@ export function get_song(song_id, on_response) {
 
         const idQuery = store.get(song_id);
         idQuery.onsuccess = function () {
-            console.log('idQuery', idQuery.result['file']);
             on_response(idQuery.result)
         }
         idQuery.onerror = () => {

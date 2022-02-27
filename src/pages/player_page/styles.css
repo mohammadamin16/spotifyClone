@@ -20,18 +20,19 @@
 .player_page .header {
     display: flex;
     flex-direction: row;
+    align-items: center;
     width: 100%;
     justify-content: space-between;
 }
 
 .player_page .back-icon {
     width: 23px;
-    height: 15px;
+    /*height: 15px;*/
 }
 
 .player_page .option-icon {
     width: 23px;
-    height: 7px;
+    /*height: 7px;*/
     scale: 100;
 }
 
@@ -191,6 +192,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
     width: 90%;
     margin-top: 30px;
     bottom: 10vh;
