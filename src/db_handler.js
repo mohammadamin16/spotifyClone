@@ -1,7 +1,9 @@
+const DB_version = 2
+
 export function db_init() {
     console.log('initializing the songs db')
 
-    const request = indexedDB.open("songsDB", 1);
+    const request = indexedDB.open("songsDB", DB_version);
     request.onerror = function (event) {
         console.error("An error occurred with IndexedDB");
         console.error(event);
@@ -12,18 +14,16 @@ export function db_init() {
         db.onerror = event => {
             console.error(event)
         }
-        const store = db.createObjectStore("songs", {keyPath: "id"})
-        // var objectStore = db.createObjectStore("toDoList", {keyPath: "taskTitle"});
-        store.createIndex("file", ["file"], {unique: false})
-        store.createIndex("id_index", ["id"], {unique: true})
-        console.log('it"s good')
-
+        const songsStore = db.createObjectStore("songs", {keyPath: "id"})
+        const favSongStore = db.createObjectStore("fav_songs", {keyPath: "id"})
+        songsStore.createIndex("id_index", ["id"], {unique: true})
+        favSongStore.createIndex("id_index", ["id"], {unique: true})
     }
 
 }
 
 export function add_song(song) {
-    const request = indexedDB.open("songsDB", 1);
+    const request = indexedDB.open("songsDB", DB_version);
     request.onerror = (e) => {
         console.error(e)
     }
@@ -50,8 +50,7 @@ export function add_song(song) {
 }
 
 export function get_song(song_id, on_response) {
-
-    const request = indexedDB.open("songsDB", 1);
+    const request = indexedDB.open("songsDB", DB_version);
     request.onsuccess = () => {
         const db = request.result;
 
@@ -69,12 +68,91 @@ export function get_song(song_id, on_response) {
         transaction.oncomplete = function () {
             db.close();
         }
-
     }
+}
 
+export function add_fav(song, on_response) {
+    const request = indexedDB.open("songsDB", DB_version);
+    request.onerror = (e) => {
+        console.error(e)
+    }
+    request.onsuccess = () => {
+        const db = request.result;
+
+        const transaction = db.transaction("fav_songs", "readwrite");
+
+        const store = transaction.objectStore("fav_songs");
+
+        store.put(song);
+        transaction.onerror = (e) => {
+            console.log(e)
+        }
+        transaction.onabort = (e) => {
+            console.log(e)
+        }
+        transaction.oncomplete = function () {
+            console.log('new FAV song was added successfully')
+            on_response(true)
+            db.close();
+        };
+    }
+}
+
+export function remove_fav(song_id, on_response) {
+    const request = indexedDB.open("songsDB", DB_version);
+    request.onerror = (e) => {
+        console.error(e)
+    }
+    request.onsuccess = () => {
+        const db = request.result;
+
+        const transaction = db.transaction("fav_songs", "readwrite");
+
+        const store = transaction.objectStore("fav_songs");
+
+        store.delete(song_id);
+
+        transaction.onerror = (e) => {
+            console.log(e)
+        }
+        transaction.onabort = (e) => {
+            console.log(e)
+        }
+        transaction.oncomplete = function () {
+            on_response(false)
+            console.log('FAV song was removed successfully!')
+
+            db.close();
+        };
+    }
 }
 
 
-// add_song({id: 100, file: 'some file'})
+export function get_fav_song(song_id, on_response) {
+    const request = indexedDB.open("songsDB", DB_version);
+    request.onsuccess = () => {
+        const db = request.result;
+
+        const transaction = db.transaction("fav_songs", "readonly");
+
+        const store = transaction.objectStore("fav_songs");
+
+        const idQuery = store.get(song_id);
+        idQuery.onsuccess = function () {
+            on_response(idQuery.result)
+        }
+        idQuery.onerror = () => {
+            on_response(null)
+        }
+        transaction.oncomplete = function () {
+            db.close();
+        }
+    }
+}
+
+
+// add_fav({id: 100})
+// remove_fav(100)
+// get_fav_song(1300, (r) => {console.log(r)})
 
 // get_song(100)

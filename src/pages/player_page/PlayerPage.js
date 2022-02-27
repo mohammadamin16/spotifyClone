@@ -52,7 +52,7 @@ export function PlayerPage(data) {
                 axios.get(URL, {responseType: "blob"})
                     .then(function (response) {
                         let reader = new window.FileReader();
-                        reader.readAsDataURL(response.data);
+                        reader.readAsArrayBuffer(response.data);
                         reader.onload = function () {
                             let audioDataUrl = reader.result;
                             audioPlayer.setAttribute("src", audioDataUrl);
@@ -108,7 +108,6 @@ export function PlayerPage(data) {
 
 
     player_page.querySelector('.back-icon').onclick = () => {
-        // router.navigate(`/album/${parseInt(data['album_index'])}`)
         window.history.back()
     }
 

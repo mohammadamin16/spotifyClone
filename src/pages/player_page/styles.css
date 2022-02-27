@@ -27,12 +27,10 @@
 
 .player_page .back-icon {
     width: 23px;
-    /*height: 15px;*/
 }
 
 .player_page .option-icon {
     width: 23px;
-    /*height: 7px;*/
     scale: 100;
 }
 
@@ -166,8 +164,6 @@
 
 .player_page .controls .btn {
     width: 25px;
-    /*height: 20px;*/
-    /*height: 10px;*/
 }
 
 .player_page .controls .play-btn-container {
