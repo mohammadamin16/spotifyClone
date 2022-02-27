@@ -1,4 +1,4 @@
-const DB_version = 2
+const DB_version = 3
 
 export function db_init() {
     console.log('initializing the songs db')
@@ -43,7 +43,6 @@ export function add_song(song) {
             console.log(e)
         }
         transaction.oncomplete = function () {
-            console.log('new song was added successfully')
             db.close();
         };
     }
@@ -84,6 +83,7 @@ export function add_fav(song, on_response) {
         const store = transaction.objectStore("fav_songs");
 
         store.put(song);
+
         transaction.onerror = (e) => {
             console.log(e)
         }
@@ -91,7 +91,6 @@ export function add_fav(song, on_response) {
             console.log(e)
         }
         transaction.oncomplete = function () {
-            console.log('new FAV song was added successfully')
             on_response(true)
             db.close();
         };
@@ -120,7 +119,6 @@ export function remove_fav(song_id, on_response) {
         }
         transaction.oncomplete = function () {
             on_response(false)
-            console.log('FAV song was removed successfully!')
 
             db.close();
         };
@@ -151,6 +149,29 @@ export function get_fav_song(song_id, on_response) {
 }
 
 
+export function get_all_fav_song(on_response) {
+    const request = indexedDB.open("songsDB", DB_version);
+    request.onsuccess = () => {
+        const db = request.result;
+
+        const transaction = db.transaction("fav_songs", "readonly");
+
+        const store = transaction.objectStore("fav_songs");
+
+        const idQuery = store.getAll();
+        idQuery.onsuccess = function () {
+            on_response(idQuery.result)
+        }
+        idQuery.onerror = () => {
+            on_response(null)
+        }
+        transaction.oncomplete = function () {
+            db.close();
+        }
+    }
+}
+
+// get_all_fav_song((r) => {console.log(r)})
 // add_fav({id: 100})
 // remove_fav(100)
 // get_fav_song(1300, (r) => {console.log(r)})

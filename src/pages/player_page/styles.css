@@ -84,8 +84,13 @@
     right: 10px;
     top: 10px;
     width: 24px;
+    transition: all 300ms ease-out;
 }
 
+.player_page .song .liked_btn:active{
+    transform: scale(1.5);
+    filter: drop-shadow(0 0 5px white) ;
+}
 .player_page .click-taker {
     width: 100%;
     top: -8px;
@@ -110,7 +115,7 @@
 }
 
 .player_page .timeline .animated {
-    transition: all ease 400ms;
+    /*transition: all ease-in-out 400ms;*/
 }
 
 .player_page .timeline .not-animated {
@@ -128,7 +133,7 @@
 .player_page .timeline .pointer {
     position: absolute;
     top: -4.5px;
-    left: 0%;
+    left: 0;
     width: 13px;
     height: 13px;
     border-radius: 100px;
@@ -172,7 +177,6 @@
     align-items: center;
     width: 63px;
     height: 63px;
-    /*border: 1px solid red;*/
     background-color: white;
     border-radius: 200px;
 }

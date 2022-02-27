@@ -9,8 +9,6 @@
     height: 100vh;
     color: white;
     z-index: 0;
-    overflow-y: scroll;
-
 }
 
 .fade {
@@ -144,6 +142,7 @@
     width: 100%;
     margin-top: 20px;
     /*border: red 1px solid;*/
+    overflow-x: scroll;
     height: 30vh;
     padding-bottom: 20vh;
 }

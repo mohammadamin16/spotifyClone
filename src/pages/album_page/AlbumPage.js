@@ -33,11 +33,22 @@ export function AlbumPage(collection_index) {
 
     album_page.querySelector('.play-icon').setAttribute("src", play_icon)
     album_page.querySelector('.shuffle-icon').setAttribute("src", shuffle_icon)
-    album_page.addEventListener("scroll", function(event) {
-        console.log(window.scrollY)
-        console.log(album_page.scrollY)
-    });
+    const cover_container = album_page.querySelector('.cover')
+
+    let cover_width = 272
+    // album_page.addEventListener("scroll", function(event) {
+    //     // let new_width = 272 - album_page.scrollTop
+    //     // if (Math.abs(cover_width - new_width) > 10){
+    //     //     cover_width = new_width
+    //     // }
+    //     // cover_container.style.width = `${Math.floor(cover_width)}px`
+    //     cover_container.style.width = `${cover_width - album_page.scrollTop}px`
+    //     console.log(album_page.scrollTop)
+    // });
+
+
     let track_container = album_page.querySelector(".track_container")
+
     if (songs_data_api) {
         for (let i = 0; i < songs_data_api.length; i++) {
             let t = Track(songs_data_api[i], collection_index, i, true)

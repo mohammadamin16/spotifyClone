@@ -24,9 +24,7 @@ export function Track(data, album_index, song_index, hide_thumb = false) {
         track.querySelector('.song_thumb').setAttribute('src', album['album_thumb'])
     }
 
-
     get_fav_song(data['id'], like_btn_handler)
-
 
     function like_btn_handler(result) {
         const like_btn = track.querySelector('.like_btn')
@@ -39,12 +37,15 @@ export function Track(data, album_index, song_index, hide_thumb = false) {
 
             } else {
                 like_btn.setAttribute('src', heart_icon)
-                add_fav({id:data['id']}, like_btn_handler)
+                add_fav({
+                    id: data['id'],
+                    album_index: album_index,
+                    song_index: song_index,
+                    track_name: data['track_name']
+                }, like_btn_handler)
             }
         })
     }
-
-    // like_btn_handler()
 
     return track
 }

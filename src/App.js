@@ -30,12 +30,11 @@ router.on('/player/:album_index/:song_index', function ({data}) {
     goToPage('playerPage', data)
 });
 
-router.resolve();
 
 function init() {
-    // addToScreen(menu)
+    db_init()
+    router.resolve();
 }
 
 
 init()
-db_init()

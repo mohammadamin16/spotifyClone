@@ -7,7 +7,7 @@ import next from "../../images/next.png"
 import previous from "../../images/previous.png"
 
 import shuffle from "../../images/shuffle-icon.png"
-import loading from "url:../../images/Loader.gif"
+import loading from "url:../../images/loading-buffering.gif"
 import play from "../../images/play.png"
 import pause from "../../images/pause.png"
 import repeat from "../../images/repeat.png"
@@ -16,7 +16,9 @@ import queue from "../../images/queue.png"
 import {getAlbumByIndex, getCollectionByIndex, getSongByIndex} from "../../api";
 import {router} from "../../controller";
 import axios from "axios";
-import {add_song, get_song} from "../../db_handler";
+import {add_fav, add_song, get_fav_song, get_song, remove_fav} from "../../db_handler";
+import like_icon from "../../images/Like.png";
+import heart_icon from "../../images/heart.png";
 
 function showSeconds(s) {
     let min = Math.floor(s / 60)
@@ -52,14 +54,14 @@ export function PlayerPage(data) {
                 axios.get(URL, {responseType: "blob"})
                     .then(function (response) {
                         let reader = new window.FileReader();
-                        reader.readAsArrayBuffer(response.data);
+                        reader.readAsDataURL(response.data);
                         reader.onload = function () {
                             let audioDataUrl = reader.result;
                             audioPlayer.setAttribute("src", audioDataUrl);
                             audioPlayer.pause()
                             player_page.querySelector(".play-btn").setAttribute('src', play)
-                            let new_song = {id: song_api['id'], file: audioDataUrl, title: song_api['track_name']}
-                            add_song(new_song)
+
+                            add_song({id: song_api['id'], file: audioDataUrl, title: song_api['track_name']})
                         }
                     });
             }
@@ -171,6 +173,31 @@ export function PlayerPage(data) {
         player_page.querySelector(".devices").setAttribute('src', devices)
         player_page.querySelector(".queue").setAttribute('src', queue)
     }
+
+
+    function like_btn_handler(result) {
+        const like_btn = player_page.querySelector('.liked_btn')
+        result ? like_btn.setAttribute('src', like_icon) : like_btn.setAttribute('src', heart_icon)
+        like_btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (result) {
+                like_btn.setAttribute('src', like_icon)
+                remove_fav(song_api['id'], like_btn_handler)
+
+            } else {
+                like_btn.setAttribute('src', heart_icon)
+
+                add_fav({
+                    id: song_api['id'],
+                    album_index: data['album_index'],
+                    song_index: parseInt(data['song_index']),
+                    track_name: song_api['track_name']
+                }, like_btn_handler)
+            }
+        })
+    }
+
+    get_fav_song(song_api['id'], like_btn_handler)
 
     load_images()
     player_handler()
